@@ -59,6 +59,6 @@ def _ensure_stock_request_picking_types(env):
             env["ir.model.data"].create(imd_vals)
 
 
-def post_init_hook(cr, registry):
+def post_init_hook(env):
     env = api.Environment(cr, SUPERUSER_ID, {})
     _ensure_stock_request_picking_types(env)
