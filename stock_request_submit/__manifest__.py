@@ -7,7 +7,7 @@
     "summary": "Add submit state on Stock Requests",
     "version": "18.0.1.0.0",
     "license": "LGPL-3",
-    "website": "https://github.com/OCA/stock-logistics-request",
+    "website": "https://github.com/icefluffy/stock-logistics-request",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "depends": ["stock_request"],
