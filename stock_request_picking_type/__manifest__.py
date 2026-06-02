@@ -11,6 +11,7 @@
     "category": "Warehouse",
     "depends": ["stock_request"],
     "data": [
+        # "data/stock_picking_type.xml",
         "views/stock_request_order_views.xml",
         # "views/stock_picking_views.xml",
     ],
