@@ -1,4 +1,4 @@
-from odoo import SUPERUSER_ID, api
+from odoo import api
 
 
 def _ensure_stock_request_picking_types(env):
@@ -60,5 +60,4 @@ def _ensure_stock_request_picking_types(env):
 
 
 def post_init_hook(env):
-    env = api.Environment(cr, SUPERUSER_ID, {})
     _ensure_stock_request_picking_types(env)
