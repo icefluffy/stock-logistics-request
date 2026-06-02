@@ -6,7 +6,7 @@
     "summary": "Internal request for stock",
     "version": "18.0.1.1.3",
     "license": "LGPL-3",
-    "website": "https://github.com/OCA/stock-logistics-request",
+    "website": "https://github.com/icefluffy/stock-logistics-request",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "maintainers": ["LoisRForgeFlow", "etobella"],
     "category": "Warehouse Management",
