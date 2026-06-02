@@ -1,22 +1,21 @@
 from odoo import SUPERUSER_ID, api
 
 
-def post_init_hook(cr, registry):
-    env = api.Environment(cr, SUPERUSER_ID, {})
-
+def _ensure_stock_request_picking_type(env):
     warehouse = env.ref("stock.warehouse0", raise_if_not_found=False)
     sequence = env.ref("stock_request.seq_stock_request_order", raise_if_not_found=False)
 
     if not warehouse or not sequence:
         return
 
-    PickingType = env["stock.picking.type"].with_company(warehouse.company_id)
+    company = warehouse.company_id
+    PickingType = env["stock.picking.type"].with_company(company)
 
     picking_type = PickingType.search(
         [
             ("code", "=", "stock_request_order"),
             ("warehouse_id", "=", warehouse.id),
-            ("company_id", "=", warehouse.company_id.id),
+            ("company_id", "=", company.id),
         ],
         limit=1,
     )
@@ -27,7 +26,7 @@ def post_init_hook(cr, registry):
         "code": "stock_request_order",
         "sequence_code": "SRO",
         "warehouse_id": warehouse.id,
-        "company_id": warehouse.company_id.id,
+        "company_id": company.id,
     }
 
     if picking_type:
@@ -56,3 +55,8 @@ def post_init_hook(cr, registry):
         imd.write(imd_vals)
     else:
         env["ir.model.data"].create(imd_vals)
+
+
+def post_init_hook(cr, registry):
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    _ensure_stock_request_picking_type(env)
