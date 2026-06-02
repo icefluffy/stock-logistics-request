@@ -13,7 +13,7 @@
     "data": [
         # "data/stock_picking_type.xml",
         "views/stock_request_order_views.xml",
-        # "views/stock_picking_views.xml",
+        # "views/stock_picking_views.xml", # keep disabled until properly ported to v18
     ],
     "development_status": "Beta",
     "maintainers": ["max3903"],
