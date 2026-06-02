@@ -15,6 +15,7 @@
         "views/stock_request_order_views.xml",
         # "views/stock_picking_views.xml", # keep disabled until properly ported to v18
     ],
+    "post_init_hook": "post_init_hook",
     "development_status": "Beta",
     "maintainers": ["max3903"],
 }
