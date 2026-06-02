@@ -12,6 +12,7 @@
     "depends": ["stock_request"],
     "data": [
         "views/stock_request_order_views.xml",
+        # "views/stock_picking_views.xml",
     ],
     "development_status": "Beta",
     "maintainers": ["max3903"],
