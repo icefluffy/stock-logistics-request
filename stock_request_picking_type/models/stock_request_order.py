@@ -15,23 +15,22 @@ class StockRequestOrder(models.Model):
         store=True,
         readonly=False,
         precompute=True,
+        check_company=True,
+        domain="[('code', '=', 'stock_request_order'), ('company_id', '=', company_id), ('warehouse_id', '=', warehouse_id)]",
     )
 
-    @api.depends("warehouse_id")
+    @api.depends("warehouse_id", "company_id")
     def _compute_picking_type_id(self):
-        companies = self.env.context.get("allowed_company_ids", []).copy()
-        companies.append(False)
+        picking_type_obj = self.env["stock.picking.type"]
         for order in self:
-            order.picking_type_id = (
-                self.env["stock.picking.type"]
-                .search(
+            picking_type = False
+            if order.warehouse_id and order.company_id:
+                picking_type = picking_type_obj.search(
                     [
                         ("code", "=", "stock_request_order"),
-                        "|",
-                        ("warehouse_id.company_id", "in", companies),
-                        ("warehouse_id", "=", self.warehouse_id.id or False),
+                        ("warehouse_id", "=", order.warehouse_id.id),
+                        ("company_id", "=", order.company_id.id),
                     ],
                     limit=1,
                 )
-                .id
-            )
+            order.picking_type_id = picking_type
